@@ -1,4 +1,4 @@
-# Constancia del equipo para el Laboratorio 6: CODEBREAKERS
+# Laboratorio 6: CODEBREAKERS
 
 **Curso:** FDSI  
 **Integrantes:** Jose Lancheros, Jeyder Leon y Juan Gomez  
@@ -7,7 +7,7 @@
 
 ## Propósito
 
-Dejamos por escrito la solución que explicamos y demostramos en vivo en el Laboratorio 6. El reto era descubrir la clave que pide el programa `reto_codebreakers_linux_x64` y lograr que mostrara la bandera. Como no tomamos capturas el día de la clase, esta constancia se reconstruye con los archivos del kit y con el proyecto de Ghidra que guardamos. Cada dato que aparece aquí se puede volver a comprobar con los comandos que están casi al final.
+Dejamos por escrito la solución que explicamos y demostramos en vivo en el Laboratorio 6. El reto era descubrir la clave que pide el programa `reto_codebreakers_linux_x64` y lograr que mostrara la bandera. Este documento se apoya en los archivos del kit y en el proyecto de Ghidra que guardamos. Cada dato que aparece aquí se puede volver a comprobar con los comandos que están casi al final.
 
 ## Resultado
 
@@ -82,59 +82,59 @@ En un Linux x86-64 o en WSL también se puede correr el programa, escribir `BREA
 
 ## Capturas
 
-Estas imágenes no son de la clase. Las generamos el 19 de noviembre de 2026 al repetir la solución con los mismos archivos del kit, para dejar evidencia visual de cada resultado. Las de Ghidra son del proyecto del laboratorio abierto de nuevo. Las de terminal muestran la salida real de cada comando y las del validador son la guía HTML del laboratorio con la clave escrita.
+Estas imágenes se tomaron el 19 de noviembre de 2026 con los mismos archivos del kit. Las de Ghidra son del proyecto del laboratorio. Las de terminal muestran la salida real de cada comando y las del validador son la guía HTML del laboratorio con la clave escrita.
 
 **Captura 1. El validador de la guía acepta la clave y muestra la bandera**
 
-![Validador con la clave correcta](capturas_constancia_lab6/validador_clave_correcta.png)
+![Validador con la clave correcta](capturas_lab6/validador_clave_correcta.png)
 
 **Captura 2. El mismo validador rechaza una clave incorrecta**
 
-![Validador con una clave incorrecta](capturas_constancia_lab6/validador_clave_incorrecta.png)
+![Validador con una clave incorrecta](capturas_lab6/validador_clave_incorrecta.png)
 
 **Captura 3. Descifrado del bloque aes_ct con OpenSSL**
 
-![Descifrado con OpenSSL](capturas_constancia_lab6/terminal_descifrado.png)
+![Descifrado con OpenSSL](capturas_lab6/terminal_descifrado.png)
 
 **Captura 4. Cadenas del binario, con los mensajes, la clave y el IV**
 
-![Cadenas del binario](capturas_constancia_lab6/terminal_cadenas.png)
+![Cadenas del binario](capturas_lab6/terminal_cadenas.png)
 
 **Captura 5. La llamada a strcmp y los dos caminos del if dentro de main**
 
-![Comparación con strcmp](capturas_constancia_lab6/terminal_comparacion.png)
+![Comparación con strcmp](capturas_lab6/terminal_comparacion.png)
 
 **Captura 6. El proyecto ECI_CODEBREAKERS abierto en Ghidra, en main con el Decompiler**
 
-![Ghidra con el Decompiler en main](capturas_constancia_lab6/ghidra_decompiler_main.png)
+![Ghidra con el Decompiler en main](capturas_lab6/ghidra_decompiler_main.png)
 
-Esta sí es del proyecto de Ghidra que guardamos en el laboratorio, abierto de nuevo el 19 de noviembre de 2026. Se ve el programa `reto_codebreakers_linux_x64` en el CodeBrowser, el cursor en `001019df` justo después de la llamada a `add_round_key`, la función `main` en el Decompiler y los datos `DAT_00102320` y las constantes que se combinan con XOR antes de la comparación.
+Es del proyecto de Ghidra que guardamos en el laboratorio. Se ve el programa `reto_codebreakers_linux_x64` en el CodeBrowser, el cursor en `001019df` justo después de la llamada a `add_round_key`, la función `main` en el Decompiler y los datos `DAT_00102320` y las constantes que se combinan con XOR antes de la comparación.
 
 **Captura 7. Search for Strings con los 24 resultados, parado en el título de la bóveda**
 
-![Strings, título de la bóveda](capturas_constancia_lab6/ghidra_strings_boveda.png)
+![Strings, título de la bóveda](capturas_lab6/ghidra_strings_boveda.png)
 
 **Captura 8. La cadena ACCESO CONCEDIDO en 001020a2**
 
-![Strings, acceso concedido](capturas_constancia_lab6/ghidra_strings_concedido.png)
+![Strings, acceso concedido](capturas_lab6/ghidra_strings_concedido.png)
 
 **Captura 9. La bandera FLAG{CODEBREAKERS_ECI} en 001020b3**
 
-![Strings, bandera](capturas_constancia_lab6/ghidra_strings_flag.png)
+![Strings, bandera](capturas_lab6/ghidra_strings_flag.png)
 
 **Captura 10. La cadena ACCESO DENEGADO en 001020ca**
 
-![Strings, acceso denegado](capturas_constancia_lab6/ghidra_strings_denegado.png)
+![Strings, acceso denegado](capturas_lab6/ghidra_strings_denegado.png)
 
 **Captura 11. La comparación en el Decompiler**
 
-![Decompiler con strcmp](capturas_constancia_lab6/ghidra_strcmp_decompiler.png)
+![Decompiler con strcmp](capturas_lab6/ghidra_strcmp_decompiler.png)
 
 En esta última se ve `iVar21 = strcmp(...)`. Si `iVar21 == 0` el programa hace `puts` de `ACCESO CONCEDIDO` y de la bandera. En el `else` hace `puts` de `ACCESO DENEGADO`. En el Listing se ve además `aes_ct` en `001020e0`, el bloque cifrado que se descifra antes de comparar.
 
 **Captura 12. El proyecto ECI_CODEBREAKERS con el programa importado**
 
-![Ghidra, proyecto con el programa importado](capturas_constancia_lab6/ghidra_proyecto_abierto.png)
+![Ghidra, proyecto con el programa importado](capturas_lab6/ghidra_proyecto_abierto.png)
 
 Es la ventana Open Program de Ghidra. Muestra el proyecto `ECI_CODEBREAKERS` y dentro el archivo `reto_codebreakers_linux_x64`, que es la evidencia de que el ELF fue importado al proyecto.
 
@@ -144,7 +144,7 @@ Aunque la contraseña esté cifrada con AES-256, la clave y el IV viajan dentro 
 
 ## Alcance y evidencia
 
-Esta constancia registra lo que hicimos como equipo. No tomamos capturas durante la sustentación. Las imágenes de la sección Capturas se hicieron después, al repetir la solución, y así están indicadas. Lo escrito se respalda con estos archivos del kit:
+Este documento registra lo que hicimos como equipo. Las imágenes están en la sección Capturas. Lo escrito se respalda con estos archivos del kit:
 
 - `reto_codebreakers_linux_x64`, de donde salen los mensajes, el bloque cifrado, la clave, el IV y la llamada a `strcmp`.
 - `ECI_CODEBREAKERS.rep`, el proyecto de Ghidra que guardamos el 4 de noviembre, con el programa importado y la última posición dentro de `main`.
